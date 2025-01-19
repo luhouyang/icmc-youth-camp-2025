@@ -1,1 +1,33 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"youth-camp-icmc-2025","appId":"1:466963417642:android:ef0686e537f24a13349153","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"youth-camp-icmc-2025","configurations":{"android":"1:466963417642:android:ef0686e537f24a13349153","ios":"1:466963417642:ios:653b5f7983ef94a9349153","macos":"1:466963417642:ios:653b5f7983ef94a9349153","web":"1:466963417642:web:884922d83aa7b85f349153","windows":"1:466963417642:web:2216cda50b2fd47d349153"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "youth-camp-icmc-2025",
+          "appId": "1:466963417642:android:ef0686e537f24a13349153",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "youth-camp-icmc-2025",
+          "configurations": {
+            "android": "1:466963417642:android:ef0686e537f24a13349153",
+            "ios": "1:466963417642:ios:653b5f7983ef94a9349153",
+            "macos": "1:466963417642:ios:653b5f7983ef94a9349153",
+            "web": "1:466963417642:web:884922d83aa7b85f349153",
+            "windows": "1:466963417642:web:2216cda50b2fd47d349153"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
