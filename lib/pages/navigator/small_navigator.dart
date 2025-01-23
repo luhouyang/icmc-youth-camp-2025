@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:yc_icmc_2025/pages/about/small_about_page.dart';
+import 'package:yc_icmc_2025/pages/admin/small_admin_page.dart';
 import 'package:yc_icmc_2025/pages/home/small_home_page.dart';
 import 'package:yc_icmc_2025/states/app_state.dart';
 import 'package:yc_icmc_2025/widgets/ui_color.dart';
@@ -64,6 +65,8 @@ class _SmallNavigatorState extends State<SmallNavigator> with TickerProviderStat
         return const SmallHomePage();
       } else if (index == 1) {
         return const SmallAboutPage();
+      } else if (index == 2) {
+        return const SmallAdminPage();
       }
       return const SmallHomePage();
     }

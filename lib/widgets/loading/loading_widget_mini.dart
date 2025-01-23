@@ -24,9 +24,9 @@ class _LoadingWidgetMiniState extends State<LoadingWidgetMini> {
 
   final List _colorsDark = [
     UIColor().transparentPrimaryOrange,
-    UIColor().secondaryOrange.withOpacity(0.75),
-    UIColor().secondaryOrange.withOpacity(0.85),
-    UIColor().secondaryOrange.withOpacity(0.95),
+    UIColor().secondaryRed.withOpacity(0.75),
+    UIColor().secondaryRed.withOpacity(0.85),
+    UIColor().secondaryRed.withOpacity(0.95),
   ];
 
   // track colour

@@ -47,11 +47,7 @@ class _LargeLoginPageState extends State<LargeLoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(
-                  height: 64,
-                ),
-                const H1Text(text: "LOGOUT"),
-                const SizedBox(
-                  height: 16,
+                  height: 36,
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -79,7 +75,7 @@ class _LargeLoginPageState extends State<LargeLoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(
-                  height: 64,
+                  height: 36,
                 ),
                 const H1Text(text: "LOGIN"),
                 const SizedBox(

@@ -1,10 +1,11 @@
 import 'dart:math';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yc_icmc_2025/entities/group_entity.dart';
 import 'package:yc_icmc_2025/states/app_state.dart';
-import 'package:yc_icmc_2025/states/constants.dart';
-import 'package:yc_icmc_2025/widgets/ui_color.dart';
+import 'package:yc_icmc_2025/widgets/cards/group_card.dart';
+import 'package:yc_icmc_2025/widgets/loading/loading_widget_large.dart';
 
 class LargeHomePage extends StatefulWidget {
   const LargeHomePage({super.key});
@@ -17,69 +18,67 @@ class _LargeHomePageState extends State<LargeHomePage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
+    double screenHeight = MediaQuery.of(context).size.height;
 
-    return Consumer<AppState>(
-      builder: (context, appState, child) {
-        double availableScreenWidth = screenWidth - (appState.isNavBarCollapsed ? 75 : 270);
-        int crossAxisCount = (availableScreenWidth / 400).floor();
-        double aspectRation = crossAxisCount == 1 ? 0.75 : 0.65;
-        double crossAxisSpacing = 8.0;
-        double mainAxisSpacing = 8.0;
+    return FutureBuilder(
+      future: FirebaseFirestore.instance.collection('groups').get(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const LoadingWidgetLarge();
+        }
 
-        return Scaffold(
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Stack(
+        return Consumer<AppState>(
+          builder: (context, appState, child) {
+            double availableScreenWidth = screenWidth - (appState.isNavBarCollapsed ? 75 : 270);
+            int crossAxisCount = (availableScreenWidth / 300).floor();
+            double aspectRation = crossAxisCount == 2
+                ? availableScreenWidth > 700
+                    ? 1.2
+                    : 1
+                : crossAxisCount == 1
+                    ? 1.7
+                    : 0.8 + max(screenWidth, screenHeight)/min(screenWidth, screenHeight)*0.1;
+            // double aspectRation = 0.8 + max(screenWidth, screenHeight)/min(screenWidth, screenHeight)*0.1;
+            double crossAxisSpacing = 8.0;
+            double mainAxisSpacing = 8.0;
+
+            return Scaffold(
+              body: SingleChildScrollView(
+                child: Column(
                   children: [
-                    Image.asset(
-                      'assets/profile_placeholder.jpg',
-                      height: max(500, screenWidth * 0.35),
-                      width: double.infinity,
-                      fit: BoxFit.fitWidth,
+                    Stack(
+                      children: [
+                        Image.asset(
+                          'assets/banner.png',
+                          height: max(500, screenWidth * 0.35),
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ],
                     ),
-                    Positioned(
-                      top: 0,
-                      child: Container(
-                        height: max(500, screenWidth * 0.35),
-                        width: availableScreenWidth,
-                        color: (appState.isDarkMode ? UIColor().transparentPrimaryOrange : UIColor().transparentPrimaryBlue).withOpacity(0.5),
-                      ),
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: max(500, screenWidth * 0.35) / 2.5,
-                          ),
-                          Text(
-                            textAlign: TextAlign.center,
-                            "Youth Camp",
-                            style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                                  color: appState.isDarkMode ? UIColor().orangeBlack : UIColor().blueBlack,
-                                  fontSize: 64,
-                                ),
-                          )
-                        ],
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: crossAxisCount,
+                          crossAxisSpacing: crossAxisSpacing,
+                          mainAxisSpacing: mainAxisSpacing,
+                          childAspectRatio: aspectRation,
+                        ),
+                        itemCount: snapshot.data!.size,
+                        itemBuilder: (context, index) {
+                          GroupEntity groupEntity = GroupEntity.fromMap(snapshot.data!.docs[index].data());
+
+                          return GroupCardLarge(groupEntity: groupEntity);
+                        },
                       ),
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.all(Constants().largeScreenPadding),
-                  child: FirebaseAuth.instance.currentUser != null
-                      ? const Column(
-                          children: [Text("Auth")],
-                        )
-                      : const Column(
-                          children: [Text("Not auth")],
-                        ),
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       },
     );

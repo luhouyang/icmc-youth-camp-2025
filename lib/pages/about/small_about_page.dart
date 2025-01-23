@@ -46,10 +46,14 @@ class SmallAboutPage extends StatelessWidget {
                   width: 16,
                 ),
                 Text(
-                  "Some long long text",
+                  "Some long long text Some long long text Some long long text Some long long text Some long long textSome long long text Some long long text Some long long text Some long long text",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
+                const SizedBox(
+                  height: 18,
+                ),
+                const Divider(),
                 const SmallLoginPage()
               ],
             ),

@@ -1,9 +1,14 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yc_icmc_2025/entities/group_entity.dart';
 import 'package:yc_icmc_2025/states/app_state.dart';
 import 'package:yc_icmc_2025/states/constants.dart';
-import 'package:yc_icmc_2025/widgets/ui_color.dart';
+import 'package:yc_icmc_2025/widgets/cards/group_card_small.dart';
+import 'package:yc_icmc_2025/widgets/loading/loading_widget_large.dart';
 
 class SmallHomePage extends StatefulWidget {
   const SmallHomePage({super.key});
@@ -17,71 +22,64 @@ class _SmallHomePageState extends State<SmallHomePage> with TickerProviderStateM
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Consumer<AppState>(
-      builder: (context, appState, child) {
-        int crossAxisCount = (screenWidth / 400).ceil();
-        double aspectRation = 0.6;
-        double crossAxisSpacing = 4.0;
-        double mainAxisSpacing = 4.0;
+    return FutureBuilder(
+        future: FirebaseFirestore.instance.collection('groups').get(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const LoadingWidgetLarge();
+          }
 
-        return Scaffold(
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(Constants().smallScreenPadding),
-              child: Column(
-                children: [
-                  Stack(
-                    children: [
-                      Image.asset(
-                        'assets/profile_placeholder.jpg',
-                        height: 250,
-                        width: double.infinity,
-                        fit: BoxFit.fitWidth,
-                      ),
-                      Positioned(
-                        top: 0,
-                        child: Container(
+          return Consumer<AppState>(
+            builder: (context, appState, child) {
+              int crossAxisCount = 1;
+              double aspectRation = max(screenWidth, 200)/min(screenWidth, 200)*0.85;
+              double crossAxisSpacing = 4.0;
+              double mainAxisSpacing = 4.0;
+
+              return Scaffold(
+                body: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(Constants().smallScreenPadding),
+                    child: Column(
+                      children: [
+                        Stack(
+                      children: [
+                        Image.asset(
+                          'assets/banner.png',
                           height: 250,
-                          width: screenWidth,
-                          color: (appState.isDarkMode ? UIColor().transparentPrimaryOrange : UIColor().transparentPrimaryBlue).withOpacity(0.5),
+                          width: double.infinity,
+                          fit: BoxFit.cover,
                         ),
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 120,
-                            ),
-                            Text(
-                              textAlign: TextAlign.center,
-                              "Youth Camp",
-                              style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                                    color: appState.isDarkMode ? UIColor().orangeBlack : UIColor().blueBlack,
-                                    fontSize: 36,
-                                  ),
-                            )
-                          ],
+                      ],
+                    ),
+                        const SizedBox(
+                          height: 24,
                         ),
+                        Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: crossAxisCount,
+                          crossAxisSpacing: crossAxisSpacing,
+                          mainAxisSpacing: mainAxisSpacing,
+                          childAspectRatio: aspectRation,
+                        ),
+                        itemCount: snapshot.data!.size,
+                        itemBuilder: (context, index) {
+                          GroupEntity groupEntity = GroupEntity.fromMap(snapshot.data!.docs[index].data());
+
+                          return GroupCardSmall(groupEntity: groupEntity);
+                        },
                       ),
-                    ],
+                    ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  FirebaseAuth.instance.currentUser != null
-                      ? const Column(
-                          children: [Text("Auth")],
-                        )
-                      : const Column(
-                          children: [Text("Not auth")],
-                        )
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
+                ),
+              );
+            },
+          );
+        });
   }
 }

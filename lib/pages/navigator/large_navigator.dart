@@ -135,7 +135,7 @@ class _LargeNavigatorState extends State<LargeNavigator> {
                             textStyle: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: appState.isDarkMode ? UIColor().secondaryOrange : UIColor().secondaryBlue,
+                              color: appState.isDarkMode ? UIColor().secondaryRed : UIColor().secondaryBlue,
                             ),
                           ),
                           icon: Icon(
@@ -192,7 +192,7 @@ class _LargeNavigatorState extends State<LargeNavigator> {
                               textStyle: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                color: appState.isDarkMode ? UIColor().secondaryOrange : UIColor().secondaryBlue,
+                                color: appState.isDarkMode ? UIColor().secondaryRed : UIColor().secondaryBlue,
                               ),
                             ),
                             icon: Icon(

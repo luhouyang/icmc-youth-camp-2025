@@ -9,7 +9,7 @@ class LoadingWidget {
       backgroundColor: Colors.transparent,
       child: Center(
         child: LoadingAnimationWidget.staggeredDotsWave(
-          color: AdaptiveTheme.of(context).mode.isLight ? UIColor().secondaryBlue : UIColor().secondaryOrange,
+          color: AdaptiveTheme.of(context).mode.isLight ? UIColor().secondaryBlue : UIColor().secondaryRed,
           size: 50,
         ),
       ),

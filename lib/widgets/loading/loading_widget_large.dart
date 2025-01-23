@@ -10,7 +10,7 @@ class LoadingWidgetLarge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: LoadingAnimationWidget.staggeredDotsWave(
-        color: AdaptiveTheme.of(context).mode.isLight ? UIColor().secondaryBlue : UIColor().secondaryOrange,
+        color: AdaptiveTheme.of(context).mode.isLight ? UIColor().secondaryBlue : UIColor().secondaryRed,
         size: 50,
       ),
     );

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UIColor {
-  final Color primaryBlue = const Color.fromARGB(255, 10, 10, 75);
-  final Color secondaryBlue = const Color.fromARGB(255, 5, 175, 205);
+  final Color primaryBlue = const Color.fromARGB(255, 28, 37, 90);
+  final Color secondaryBlue = const Color.fromARGB(255, 221, 227, 238);
 
-  final Color primaryOrange = const Color.fromARGB(255, 220, 110, 30);
-  final Color secondaryOrange = const Color.fromARGB(255, 250, 180, 30);
+  final Color primaryDarkRed = const Color.fromARGB(255, 125, 0, 0);
+  final Color secondaryRed = const Color.fromARGB(255, 255, 59, 45);
 
   final Color primaryRed = const Color.fromARGB(255, 255, 64, 64);
 
@@ -16,25 +16,15 @@ class UIColor {
   final Color mediumGray = const Color.fromARGB(255, 215, 215, 215);
   final Color lightGray = const Color.fromARGB(255, 245, 245, 245);
 
-  final Color blueBlack = const Color.fromARGB(255, 5, 5, 25);
+  final Color blueBlack = const Color.fromARGB(255, 14, 19, 45);
   final Color orangeBlack = const Color.fromARGB(255, 30, 5, 5);
 
   // Transparent Colors
   final Color transparentPrimaryBlue = const Color.fromARGB(255, 201, 214, 232);
   final Color transparentSecondaryBlue = const Color.fromARGB(255, 213, 246, 251);
 
-  final Color transparentPrimaryOrange = const Color.fromARGB(255, 255, 213, 183);
-  final Color transparentSecondaryOrange = const Color.fromARGB(255, 255, 229, 200);
-}
-
-class DataPresentationColor {
-  final Color lightBackground = UIColor().lightGray;
-  final Color darkBackground = UIColor().primaryBlue;
-
-  final List<Color> colourChoices = [
-    const Color.fromARGB(255, 255, 200, 80),
-    const Color.fromARGB(255, 40, 215, 245),
-  ];
+  final Color transparentPrimaryOrange = const Color.fromARGB(255, 255, 197, 183);
+  final Color transparentSecondaryOrange = const Color.fromARGB(255, 255, 215, 200);
 }
 
 final ThemeData lightTheme = ThemeData(
@@ -63,7 +53,7 @@ final ThemeData lightTheme = ThemeData(
         fontWeight: FontWeight.w500,
       ),
     ),
-    headlineSmall:  GoogleFonts.inter(
+    headlineSmall: GoogleFonts.inter(
       textStyle: TextStyle(
         color: UIColor().white,
         fontSize: 16,
@@ -136,7 +126,7 @@ final ThemeData lightTheme = ThemeData(
 final ThemeData darkTheme = ThemeData(
   primaryColor: UIColor().white,
   scaffoldBackgroundColor: UIColor().blueBlack,
-  iconTheme: IconThemeData(color: UIColor().secondaryOrange),
+  iconTheme: IconThemeData(color: UIColor().secondaryRed),
   textTheme: TextTheme(
     displayLarge: GoogleFonts.inter(
       textStyle: TextStyle(
@@ -147,7 +137,7 @@ final ThemeData darkTheme = ThemeData(
     ),
     displayMedium: GoogleFonts.inter(
       textStyle: TextStyle(
-        color: UIColor().secondaryOrange,
+        color: UIColor().secondaryRed,
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
@@ -163,7 +153,7 @@ final ThemeData darkTheme = ThemeData(
       textStyle: TextStyle(color: UIColor().white),
     ),
     labelLarge: GoogleFonts.inter(
-      textStyle: TextStyle(color: UIColor().primaryOrange),
+      textStyle: TextStyle(color: UIColor().primaryDarkRed),
     ),
     labelSmall: GoogleFonts.inter(
       textStyle: TextStyle(color: UIColor().gray),
@@ -173,7 +163,7 @@ final ThemeData darkTheme = ThemeData(
     style: ElevatedButton.styleFrom(
       // padding: const EdgeInsets.all(16),
       foregroundColor: UIColor().blueBlack,
-      backgroundColor: UIColor().secondaryOrange,
+      backgroundColor: UIColor().secondaryRed,
       shape: ContinuousRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -191,7 +181,7 @@ final ThemeData darkTheme = ThemeData(
     border: UnderlineInputBorder(
       borderRadius: BorderRadius.circular(4),
       borderSide: BorderSide(
-        color: UIColor().secondaryOrange,
+        color: UIColor().secondaryRed,
       ),
     ),
     hoverColor: UIColor().transparentPrimaryOrange,
@@ -207,13 +197,13 @@ final ThemeData darkTheme = ThemeData(
   ),
   scrollbarTheme: ScrollbarThemeData(
     thumbColor: WidgetStatePropertyAll(
-      UIColor().secondaryOrange,
+      UIColor().secondaryRed,
     ),
   ),
   cardTheme: CardTheme(
     color: UIColor().darkGray,
   ),
-  highlightColor: UIColor().primaryOrange,
+  highlightColor: UIColor().primaryDarkRed,
   dividerTheme: DividerThemeData(
     color: UIColor().white,
     thickness: 1.5,

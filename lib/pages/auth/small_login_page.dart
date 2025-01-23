@@ -47,11 +47,7 @@ class _SmallLoginPageState extends State<SmallLoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(
-                  height: 32,
-                ),
-                const H1Text(text: "LOGOUT"),
-                const SizedBox(
-                  height: 8,
+                  height: 16,
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -59,7 +55,7 @@ class _SmallLoginPageState extends State<SmallLoginPage> {
                     Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(14),
+                          padding: const EdgeInsets.all(8),
                         ),
                         onPressed: () async {
                           kIsWeb ? await webLogin.logout(context) : await appLogin.logout(context);
@@ -79,7 +75,7 @@ class _SmallLoginPageState extends State<SmallLoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(
-                  height: 32,
+                  height: 16,
                 ),
                 const H1Text(text: "LOGIN"),
                 const SizedBox(
@@ -102,6 +98,9 @@ class _SmallLoginPageState extends State<SmallLoginPage> {
                       Row(mainAxisSize: MainAxisSize.max, children: [
                         Expanded(
                           child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.all(8),
+                            ),
                             onPressed: () async {
                               if (_loginFormKey.currentState!.validate()) {
                                 snackBarText.showBanner(msg: "Logging In", context: context);

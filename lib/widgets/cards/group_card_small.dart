@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:yc_icmc_2025/entities/group_entity.dart';
 import 'package:yc_icmc_2025/widgets/texts/h1_text.dart';
 
-class GroupCardLarge extends StatefulWidget {
+class GroupCardSmall extends StatefulWidget {
   final GroupEntity groupEntity;
 
-  const GroupCardLarge({super.key, required this.groupEntity});
+  const GroupCardSmall({super.key, required this.groupEntity});
 
   @override
-  State<GroupCardLarge> createState() => _GroupCardLargeState();
+  State<GroupCardSmall> createState() => _GroupCardSmallState();
 }
 
-class _GroupCardLargeState extends State<GroupCardLarge> {
+class _GroupCardSmallState extends State<GroupCardSmall> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -34,18 +34,18 @@ class _GroupCardLargeState extends State<GroupCardLarge> {
               ),
               const Divider(),
               const SizedBox(
-                height: 16,
+                height: 8,
               ),
               Text(
                 widget.groupEntity.score.toString(),
-                style: const TextStyle(fontSize: 80, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
-                height: 16,
+                height: 8,
               ),
               const Divider(),
-              Text("Protection: ${widget.groupEntity.protection}", style: const TextStyle(fontSize: 24)),
+              Text("Protection: ${widget.groupEntity.protection}", style: const TextStyle(fontSize: 16)),
             ],
           ),
         ),
