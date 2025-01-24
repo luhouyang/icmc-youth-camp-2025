@@ -34,7 +34,7 @@ class _GroupCardLargeState extends State<GroupCardLarge> {
               ),
               const Divider(),
               const SizedBox(
-                height: 16,
+                height: 12,
               ),
               Text(
                 widget.groupEntity.score.toString(),
@@ -42,10 +42,11 @@ class _GroupCardLargeState extends State<GroupCardLarge> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
-                height: 16,
+                height: 12,
               ),
               const Divider(),
-              Text("Protection: ${widget.groupEntity.protection}", style: const TextStyle(fontSize: 24)),
+              Text("Protection: ${widget.groupEntity.protection}", style: const TextStyle(fontSize: 20)),
+              Text("Mentor: ${widget.groupEntity.mentor}", style: const TextStyle(fontSize: 20)),
             ],
           ),
         ),

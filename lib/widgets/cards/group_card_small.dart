@@ -33,19 +33,14 @@ class _GroupCardSmallState extends State<GroupCardSmall> {
                 text: widget.groupEntity.groupName,
               ),
               const Divider(),
-              const SizedBox(
-                height: 8,
-              ),
               Text(
                 widget.groupEntity.score.toString(),
-                style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(
-                height: 8,
-              ),
               const Divider(),
-              Text("Protection: ${widget.groupEntity.protection}", style: const TextStyle(fontSize: 16)),
+              Text("Protection: ${widget.groupEntity.protection}", style: const TextStyle(fontSize: 12)),
+              Text("Mentor: ${widget.groupEntity.mentor}", style: const TextStyle(fontSize: 12)),
             ],
           ),
         ),

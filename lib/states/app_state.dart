@@ -1,9 +1,11 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:yc_icmc_2025/entities/group_entity.dart';
 
 class AppState extends ChangeNotifier {
   // variables
   final AdaptiveThemeMode savedThemeMode;
+  List<GroupEntity> groupList = [];
 
   bool isDarkMode = false;
 
@@ -31,6 +33,10 @@ class AppState extends ChangeNotifier {
   void setBottomNavIndex(int idx) {
     bottomNavIndex = idx;
     notifyListeners();
+  }
+
+  void setGroupList(List<GroupEntity> gplst) {
+    groupList = gplst;
   }
 
   // getter

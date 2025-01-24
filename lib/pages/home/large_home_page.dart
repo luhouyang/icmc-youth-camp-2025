@@ -18,10 +18,10 @@ class _LargeHomePageState extends State<LargeHomePage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenHeight = MediaQuery.of(context).size.height;
 
-    return FutureBuilder(
-      future: FirebaseFirestore.instance.collection('groups').get(),
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('groups').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const LoadingWidgetLarge();
@@ -30,15 +30,14 @@ class _LargeHomePageState extends State<LargeHomePage> {
         return Consumer<AppState>(
           builder: (context, appState, child) {
             double availableScreenWidth = screenWidth - (appState.isNavBarCollapsed ? 75 : 270);
-            int crossAxisCount = (availableScreenWidth / 300).floor();
-            double aspectRation = crossAxisCount == 2
-                ? availableScreenWidth > 700
-                    ? 1.2
-                    : 1
-                : crossAxisCount == 1
-                    ? 1.7
-                    : 0.8 + max(screenWidth, screenHeight)/min(screenWidth, screenHeight)*0.1;
-            // double aspectRation = 0.8 + max(screenWidth, screenHeight)/min(screenWidth, screenHeight)*0.1;
+            int crossAxisCount = (availableScreenWidth / 350).floor();
+            double aspectRation = crossAxisCount == 1
+                ? 1.65
+                : crossAxisCount == 2
+                    ? availableScreenWidth > 850
+                        ? 1.3
+                        : 1.05
+                    : 1;
             double crossAxisSpacing = 8.0;
             double mainAxisSpacing = 8.0;
 

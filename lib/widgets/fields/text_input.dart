@@ -4,6 +4,11 @@ import 'package:yc_icmc_2025/states/constants.dart';
 import 'package:yc_icmc_2025/widgets/ui_color.dart';
 
 class TextInputs {
+  bool isNumeric(String str) {
+    RegExp numeric = RegExp(r'^-?[0-9]+$');
+    return numeric.hasMatch(str);
+  }
+
   emailVerify(value) {
     return EmailValidator.validate(value ?? "") ? null : "Please enter a valid email";
   }
@@ -14,6 +19,10 @@ class TextInputs {
 
   textVerify(value) {
     return (value == null || value.isEmpty) ? "Please enter a valid text" : null;
+  }
+
+  intNumberVerify(value) {
+    return (value == null || value.isEmpty || !isNumeric(value)) ? "Please enter an integer" : null;
   }
 
   campusCodeVerify(value) {

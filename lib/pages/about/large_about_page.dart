@@ -46,7 +46,7 @@ class LargeAboutPage extends StatelessWidget {
                   width: 16,
                 ),
                 Text(
-                  "Some long long text Some long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long text Some long long text Some long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long textSome long long text",
+                  "日期:1/4/2025 至 4/4/2025(4 天三夜)\n地点:怡保堂卫理幼儿园\n对象:青少年 13-18 岁(开放给信徒/非信徒的华裔,12 岁勉强接受)\n营会概念及宗旨:帮助营员认识自己的价值观、自我,并加强合作精神与信仰认知\n主题:《我是谁?》\n营费:RM 100",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),

@@ -1,11 +1,13 @@
 class GroupEntity {
+  final String id;
   final String groupName;
   final List<dynamic> members;
-  final int score;
-  final int protection;
+  int score;
+  int protection;
   final String mentor;
 
   GroupEntity({
+    required this.id,
     required this.groupName,
     required this.members,
     required this.score,
@@ -15,6 +17,7 @@ class GroupEntity {
 
   factory GroupEntity.fromMap(Map<String, dynamic> map) {
     return GroupEntity(
+      id: map["id"],
       groupName: map["groupName"],
       members: map["members"],
       score: map["score"],
@@ -25,6 +28,7 @@ class GroupEntity {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'groupName': groupName,
       'members': members,
       'score': score,
