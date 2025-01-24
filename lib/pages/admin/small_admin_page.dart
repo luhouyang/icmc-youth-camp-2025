@@ -1,6 +1,10 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:provider/provider.dart';
 import 'package:yc_icmc_2025/entities/group_entity.dart';
 import 'package:yc_icmc_2025/enums/record_enum.dart';
@@ -11,6 +15,7 @@ import 'package:yc_icmc_2025/widgets/loading/loading_widget.dart';
 import 'package:yc_icmc_2025/widgets/loading/loading_widget_large.dart';
 import 'package:yc_icmc_2025/widgets/texts/h1_text.dart';
 import 'package:yc_icmc_2025/widgets/texts/snack_bar_text.dart';
+import 'package:yc_icmc_2025/widgets/ui_color.dart';
 
 class SmallAdminPage extends StatefulWidget {
   const SmallAdminPage({super.key});
@@ -36,10 +41,25 @@ class _SmallAdminPageState extends State<SmallAdminPage> {
   String winningGroupName = "";
   String losingGroupName = "";
 
+  StreamController<int> selected = StreamController<int>();
+
+  @override
+  void dispose() {
+    selected.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // double screenWidth = MediaQuery.of(context).size.width;
+    double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
+
+    final items = <String>[
+      'Increase',
+      'Decrease',
+      'Protect',
+      'Steal',
+    ];
 
     bool hasProtectPoint(String groupName, AppState appState) {
       int index = appState.groupList.indexWhere(
@@ -699,6 +719,70 @@ class _SmallAdminPageState extends State<SmallAdminPage> {
                         width: double.infinity,
                         child: Column(
                           children: [
+                            SizedBox(
+                              height: min(screenWidth * 0.9, 600),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: FortuneWheel(
+                                      animateFirst: false,
+                                      selected: selected.stream,
+                                      indicators: <FortuneIndicator>[
+                                        FortuneIndicator(
+                                          alignment: Alignment.topCenter, // <-- changing the position of the indicator
+                                          child: TriangleIndicator(
+                                            color: appState.isDarkMode
+                                                ? UIColor().transparentSecondaryOrange
+                                                : UIColor().transparentSecondaryBlue, // <-- changing the color of the indicator
+                                            width: 35.0, // <-- changing the width of the indicator
+                                            height: 35.0, // <-- changing the height of the indicator
+                                            elevation: 5, // <-- changing the elevation of the indicator
+                                          ),
+                                        ),
+                                      ],
+                                      items: [
+                                        for (var it in items.asMap().entries)
+                                          FortuneItem(
+                                            style: FortuneItemStyle(
+                                              color: it.key % 2 == 0 ? Theme.of(context).primaryColor : Theme.of(context).highlightColor,
+                                            ),
+                                            child: Text(
+                                              it.value,
+                                              style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                                                    color: it.key % 2 == 0 ? Theme.of(context).highlightColor : Theme.of(context).primaryColor,
+                                                  ),
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.all(8),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  selected.add(Fortune.randomInt(0, items.length));
+                                });
+                              },
+                              child: Text(
+                                "ROLL",
+                                style: Theme.of(context).textTheme.headlineMedium,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            const Divider(),
+                            const SizedBox(
+                              height: 16,
+                            ),
                             Row(
                               children: [
                                 const Text("RECORD: "),
