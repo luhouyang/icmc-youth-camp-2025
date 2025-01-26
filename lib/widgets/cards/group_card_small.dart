@@ -26,7 +26,7 @@ class _GroupCardSmallState extends State<GroupCardSmall> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               H1Text(

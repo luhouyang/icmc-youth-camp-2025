@@ -3,10 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yc_icmc_2025/entities/group_entity.dart';
+import 'package:yc_icmc_2025/entities/reocrd_entity.dart';
 import 'package:yc_icmc_2025/states/app_state.dart';
 import 'package:yc_icmc_2025/states/constants.dart';
 import 'package:yc_icmc_2025/widgets/cards/group_card_small.dart';
+import 'package:yc_icmc_2025/widgets/cards/record_card.dart';
 import 'package:yc_icmc_2025/widgets/loading/loading_widget_large.dart';
+import 'package:yc_icmc_2025/widgets/loading/loading_widget_mini.dart';
+import 'package:yc_icmc_2025/widgets/texts/h1_text.dart';
 
 class SmallHomePage extends StatefulWidget {
   const SmallHomePage({super.key});
@@ -80,6 +84,38 @@ class _SmallHomePageState extends State<SmallHomePage> with TickerProviderStateM
                             },
                           ),
                         ),
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        const Divider(),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        const H1Text(text: "RECORD"),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: StreamBuilder(
+                            stream: FirebaseFirestore.instance.collection('records').orderBy('createdAt', descending: true).snapshots(),
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                return const LoadingWidgetMini(height: 48);
+                              }
+
+                              return ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: snapshot.data!.size,
+                                itemBuilder: (context, index) {
+                                  RecordEntity recordEntity = RecordEntity.fromMap(snapshot.data!.docs[index].data());
+
+                                  return RecordCard(
+                                    recordEntity: recordEntity,
+                                    appState: appState,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        )
                       ],
                     ),
                   ),

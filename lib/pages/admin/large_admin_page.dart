@@ -6,12 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:provider/provider.dart';
 import 'package:yc_icmc_2025/entities/group_entity.dart';
+import 'package:yc_icmc_2025/entities/reocrd_entity.dart';
 import 'package:yc_icmc_2025/enums/record_enum.dart';
 import 'package:yc_icmc_2025/services/firestore/game_firestore.dart';
 import 'package:yc_icmc_2025/states/app_state.dart';
+import 'package:yc_icmc_2025/widgets/cards/record_card.dart';
 import 'package:yc_icmc_2025/widgets/fields/text_input.dart';
 import 'package:yc_icmc_2025/widgets/loading/loading_widget.dart';
 import 'package:yc_icmc_2025/widgets/loading/loading_widget_large.dart';
+import 'package:yc_icmc_2025/widgets/loading/loading_widget_mini.dart';
 import 'package:yc_icmc_2025/widgets/texts/h1_text.dart';
 import 'package:yc_icmc_2025/widgets/texts/snack_bar_text.dart';
 import 'package:yc_icmc_2025/widgets/ui_color.dart';
@@ -806,11 +809,15 @@ class _LargeAdminPageState extends State<LargeAdminPage> {
                                     ),
                                     items: RecordEnum.values.map(
                                       (e) {
-                                        return DropdownMenuItem<String>(value: e.value, child: Text(e.value));
+                                        if (e.value != RecordEnum.shield.value) {
+                                          return DropdownMenuItem<String>(value: e.value, child: Text(e.value));
+                                        } else {
+                                          return const DropdownMenuItem<String>(value: "", child: Text(""));
+                                        }
                                       },
                                     ).toList(),
                                     validator: (value) {
-                                      if (value == null) {
+                                      if (value == null || value == "") {
                                         return 'Select a record type';
                                       }
                                       return null;
@@ -847,7 +854,39 @@ class _LargeAdminPageState extends State<LargeAdminPage> {
                             const SizedBox(
                               height: 36,
                             ),
-                            getForm(appState)
+                            getForm(appState),
+                            const SizedBox(
+                              height: 36,
+                            ),
+                            const Divider(),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            const H1Text(text: "RECORD"),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            StreamBuilder(
+                              stream: FirebaseFirestore.instance.collection('records').orderBy('createdAt', descending: true).snapshots(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) {
+                                  return const LoadingWidgetMini(height: 48);
+                                }
+
+                                return ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: snapshot.data!.size,
+                                  itemBuilder: (context, index) {
+                                    RecordEntity recordEntity = RecordEntity.fromMap(snapshot.data!.docs[index].data());
+
+                                    return RecordCard(
+                                      recordEntity: recordEntity,
+                                      appState: appState,
+                                    );
+                                  },
+                                );
+                              },
+                            )
                           ],
                         )),
                   ),
