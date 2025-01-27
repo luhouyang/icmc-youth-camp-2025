@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 import 'package:yc_icmc_2025/pages/auth/large_login_page.dart';
 import 'package:yc_icmc_2025/states/constants.dart';
-import 'package:yc_icmc_2025/widgets/texts/snack_bar_text.dart';
+// import 'package:yc_icmc_2025/widgets/texts/snack_bar_text.dart';
 
 class LargeAboutPage extends StatelessWidget {
   const LargeAboutPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Future<void> launchUrlAsync(String urlString) async {
-      final Uri url = Uri.parse(urlString);
+    // Future<void> launchUrlAsync(String urlString) async {
+    //   final Uri url = Uri.parse(urlString);
 
-      if (!await launchUrl(url)) {
-        if (context.mounted) {
-          SnackBarText().showBanner(msg: 'Could not launch $url', context: context);
-        }
-        throw Exception('Could not launch $url');
-      }
-    }
+    //   if (!await launchUrl(url)) {
+    //     if (context.mounted) {
+    //       SnackBarText().showBanner(msg: 'Could not launch $url', context: context);
+    //     }
+    //     throw Exception('Could not launch $url');
+    //   }
+    // }
 
     return Scaffold(
       body: SizedBox(

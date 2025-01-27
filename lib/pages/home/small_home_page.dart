@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yc_icmc_2025/entities/group_entity.dart';
@@ -25,7 +26,7 @@ class _SmallHomePageState extends State<SmallHomePage> with TickerProviderStateM
     double screenWidth = MediaQuery.of(context).size.width;
 
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('groups').snapshots(),
+        stream: FirebaseFirestore.instance.collection('groups').orderBy('score', descending: true).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const LoadingWidgetLarge();
@@ -46,6 +47,8 @@ class _SmallHomePageState extends State<SmallHomePage> with TickerProviderStateM
               double aspectRation = max(screenWidth / 2, 150) / min(screenWidth / 2, 150) * 0.75;
               double crossAxisSpacing = 4.0;
               double mainAxisSpacing = 4.0;
+
+              bool isLogin = FirebaseAuth.instance.currentUser != null;
 
               return Scaffold(
                 body: SingleChildScrollView(
@@ -80,7 +83,10 @@ class _SmallHomePageState extends State<SmallHomePage> with TickerProviderStateM
                             itemBuilder: (context, index) {
                               GroupEntity groupEntity = GroupEntity.fromMap(snapshot.data!.docs[index].data());
 
-                              return GroupCardSmall(groupEntity: groupEntity);
+                              return GroupCardSmall(
+                                groupEntity: groupEntity,
+                                isLogin: isLogin,
+                              );
                             },
                           ),
                         ),

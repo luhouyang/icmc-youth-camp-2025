@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yc_icmc_2025/entities/reocrd_entity.dart';
 import 'package:yc_icmc_2025/enums/record_enum.dart';
 import 'package:yc_icmc_2025/services/firestore/game_firestore.dart';
 import 'package:yc_icmc_2025/states/app_state.dart';
-import 'package:yc_icmc_2025/widgets/loading/loading_widget.dart';
+import 'package:yc_icmc_2025/widgets/fields/text_input.dart';
 import 'package:yc_icmc_2025/widgets/texts/snack_bar_text.dart';
 import 'package:yc_icmc_2025/widgets/ui_color.dart';
 
@@ -191,9 +193,62 @@ class _RecordCardState extends State<RecordCard> {
                   padding: const EdgeInsets.all(8),
                 ),
                 onPressed: () async {
-                  SnackBarText().showBanner(msg: "Deleting record", context: context);
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      final formKey = GlobalKey<FormState>();
+                      TextEditingController confirmationController = TextEditingController();
+                      int randNum = Random().nextInt(899) + 100;
 
-                  await GamesFirestore().deleteRecord(widget.recordEntity, widget.appState);
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+                        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                        contentPadding: const EdgeInsets.all(16.0),
+                        content: Form(
+                          key: formKey,
+                          child: SizedBox(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "Delete this record? Type $randNum",
+                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 36),
+                                ),
+                                TextInputs().inputTextWidget(
+                                    hint: "Type $randNum", validator: TextInputs().intNumberVerify, controller: confirmationController)
+                              ],
+                            ),
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("CANCEL"),
+                          ),
+                          const SizedBox(width: 8),
+                          TextButton(
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll(UIColor().primaryRed),
+                              foregroundColor: WidgetStatePropertyAll(UIColor().blueBlack),
+                            ),
+                            onPressed: () async {
+                              if (formKey.currentState!.validate() && int.parse(confirmationController.text) == randNum) {
+                                SnackBarText().showBanner(msg: "Deleting record", context: context);
+                                Navigator.of(context).pop();
+                                await GamesFirestore().deleteRecord(widget.recordEntity, widget.appState);
+                              }
+                            },
+                            child: const Text(
+                              "DELETE",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 child: Text(
                   "DELETE",

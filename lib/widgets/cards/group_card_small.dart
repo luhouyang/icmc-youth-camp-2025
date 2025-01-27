@@ -3,9 +3,10 @@ import 'package:yc_icmc_2025/entities/group_entity.dart';
 import 'package:yc_icmc_2025/widgets/texts/h1_text.dart';
 
 class GroupCardSmall extends StatefulWidget {
+  final bool isLogin;
   final GroupEntity groupEntity;
 
-  const GroupCardSmall({super.key, required this.groupEntity});
+  const GroupCardSmall({super.key, required this.groupEntity, required this.isLogin});
 
   @override
   State<GroupCardSmall> createState() => _GroupCardSmallState();
@@ -39,7 +40,7 @@ class _GroupCardSmallState extends State<GroupCardSmall> {
                 textAlign: TextAlign.center,
               ),
               const Divider(),
-              Text("Protection: ${widget.groupEntity.protection}", style: const TextStyle(fontSize: 12)),
+              if (widget.isLogin) Text("Protection: ${widget.groupEntity.protection}", style: const TextStyle(fontSize: 12)),
               Text("Mentor: ${widget.groupEntity.mentor}", style: const TextStyle(fontSize: 12)),
             ],
           ),

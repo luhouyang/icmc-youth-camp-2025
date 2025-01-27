@@ -82,6 +82,17 @@ final ThemeData lightTheme = ThemeData(
       shadowColor: UIColor().gray,
     ),
   ),
+  textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+    foregroundColor: WidgetStatePropertyAll(UIColor().white),
+    backgroundColor: WidgetStatePropertyAll(UIColor().primaryBlue),
+    shape: WidgetStatePropertyAll(
+      ContinuousRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
+    shadowColor: WidgetStatePropertyAll(UIColor().gray),
+  )),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
     fillColor: UIColor().transparentSecondaryBlue,
@@ -170,6 +181,16 @@ final ThemeData darkTheme = ThemeData(
       ),
     ),
   ),
+  textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+    foregroundColor: WidgetStatePropertyAll(UIColor().blueBlack),
+    backgroundColor: WidgetStatePropertyAll(UIColor().secondaryRed),
+    shape: WidgetStatePropertyAll(
+      ContinuousRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
+  )),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
     fillColor: UIColor().transparentSecondaryOrange,
