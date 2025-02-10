@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:yc_icmc_2025/entities/group_entity.dart';
+import 'package:yc_icmc_2025/entities/member_entity.dart';
+// import 'package:yc_icmc_2025/entities/member_entity.dart';
 import 'package:yc_icmc_2025/entities/reocrd_entity.dart';
 import 'package:yc_icmc_2025/enums/record_enum.dart';
 import 'package:yc_icmc_2025/states/app_state.dart';
@@ -190,5 +192,57 @@ class GamesFirestore {
     batch.delete(db.collection('records').doc(recordEntity.id));
 
     await batch.commit();
+  }
+
+  // Future addMember(GroupEntity groupEntity) async {
+  //   List<Timestamp> stationList = List.generate(
+  //     20,
+  //     (index) => Timestamp.now(),
+  //   );
+
+  //   List<dynamic> memberList = List.generate(
+  //     10,
+  //     (index) {
+  //       DocumentReference recRef = FirebaseFirestore.instance.collection('groups').doc();
+  //       return MemberEntity(id: recRef.id, name: "PERSON $index", stations: stationList).toMap();
+  //     },
+  //   );
+
+  //   groupEntity.members = memberList;
+
+  //   await FirebaseFirestore.instance.collection('groups').doc(groupEntity.id).set(groupEntity.toMap());
+  // }
+
+  Future confirmMember(String groupName, String playerId, int station, AppState appState) async {
+    int index = appState.groupList.indexWhere(
+      (element) => element.groupName == groupName,
+    );
+    GroupEntity gameEntity = appState.groupList[index];
+
+    List<MemberEntity> memberEntityList = gameEntity.members
+        .map(
+          (e) => MemberEntity.fromMap(e as Map<String, dynamic>),
+        )
+        .toList();
+
+    int playerIdx = memberEntityList.indexWhere(
+      (element) => element.id == playerId,
+    );
+
+    MemberEntity player = memberEntityList[playerIdx];
+
+    List<Timestamp> stations = player.stations
+        .map(
+          (e) => e as Timestamp,
+        )
+        .toList();
+
+    stations[station] = Timestamp.now();
+
+    player.stations = stations;
+    memberEntityList[playerIdx] = player;
+    gameEntity.members = memberEntityList.map((e) => e.toMap(),).toList();
+
+    await FirebaseFirestore.instance.collection('groups').doc(gameEntity.id).set(gameEntity.toMap());
   }
 }

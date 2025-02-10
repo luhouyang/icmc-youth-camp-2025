@@ -9,6 +9,7 @@ class UIColor {
   final Color secondaryRed = const Color.fromARGB(255, 255, 59, 45);
 
   final Color primaryRed = const Color.fromARGB(255, 255, 64, 64);
+  final Color primaryGreen = const Color.fromARGB(255, 64, 255, 64);
   final Color brightBlue = const Color.fromARGB(255, 0, 225, 255);
 
   final Color white = const Color.fromARGB(255, 255, 255, 255);

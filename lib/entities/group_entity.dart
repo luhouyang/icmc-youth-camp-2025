@@ -1,7 +1,7 @@
 class GroupEntity {
   final String id;
   final String groupName;
-  final List<dynamic> members;
+  List<dynamic> members;
   int score;
   int protection;
   final String mentor;
