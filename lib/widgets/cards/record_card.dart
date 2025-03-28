@@ -6,6 +6,7 @@ import 'package:yc_icmc_2025/entities/reocrd_entity.dart';
 import 'package:yc_icmc_2025/enums/record_enum.dart';
 import 'package:yc_icmc_2025/services/firestore/game_firestore.dart';
 import 'package:yc_icmc_2025/states/app_state.dart';
+import 'package:yc_icmc_2025/states/constants.dart';
 import 'package:yc_icmc_2025/widgets/fields/text_input.dart';
 import 'package:yc_icmc_2025/widgets/texts/snack_bar_text.dart';
 import 'package:yc_icmc_2025/widgets/ui_color.dart';
@@ -153,7 +154,7 @@ class _RecordCardState extends State<RecordCard> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(
-              width: 16,
+              width: 10,
             ),
             Text(
               widget.appState.groupList[loserIndex].groupName,
@@ -170,6 +171,8 @@ class _RecordCardState extends State<RecordCard> {
       );
     }
 
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
         margin: const EdgeInsets.fromLTRB(0, 4, 0, 4),
         decoration: BoxDecoration(
@@ -183,7 +186,7 @@ class _RecordCardState extends State<RecordCard> {
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              padding: screenWidth > Constants().largeScreenWidth ? const EdgeInsets.fromLTRB(16, 8, 16, 8) : const EdgeInsets.fromLTRB(8, 8, 0, 8),
               child: getRow(),
             ),
             const Expanded(child: SizedBox()),
@@ -204,6 +207,7 @@ class _RecordCardState extends State<RecordCard> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
                         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                         contentPadding: const EdgeInsets.all(16.0),
+                        scrollable: true,
                         content: Form(
                           key: formKey,
                           child: SizedBox(
@@ -212,7 +216,7 @@ class _RecordCardState extends State<RecordCard> {
                               children: [
                                 Text(
                                   "Delete this record? Type $randNum",
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 36),
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: screenWidth > Constants().largeScreenWidth ? 36 : 12),
                                 ),
                                 TextInputs().inputTextWidget(
                                     hint: "Type $randNum", validator: TextInputs().intNumberVerify, controller: confirmationController)

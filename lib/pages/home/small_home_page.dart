@@ -44,7 +44,7 @@ class _SmallHomePageState extends State<SmallHomePage> with TickerProviderStateM
           return Consumer<AppState>(
             builder: (context, appState, child) {
               int crossAxisCount = 2;
-              double aspectRation = max(screenWidth / 2, 150) / min(screenWidth / 2, 150) * 0.75;
+              double aspectRation = max(screenWidth / 2, 150) / min(screenWidth / 2, 150) * 0.7;
               double crossAxisSpacing = 4.0;
               double mainAxisSpacing = 4.0;
 
@@ -73,6 +73,7 @@ class _SmallHomePageState extends State<SmallHomePage> with TickerProviderStateM
                           padding: const EdgeInsets.all(4.0),
                           child: GridView.builder(
                             shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: crossAxisCount,
                               crossAxisSpacing: crossAxisSpacing,
