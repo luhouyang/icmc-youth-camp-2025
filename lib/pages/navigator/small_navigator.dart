@@ -19,7 +19,7 @@ class SmallNavigator extends StatefulWidget {
 }
 
 class _SmallNavigatorState extends State<SmallNavigator> with TickerProviderStateMixin {
-  late AnimationController _hideBottomBarAnimationController;
+  // late AnimationController _hideBottomBarAnimationController;
 
   final iconListAdmin = <IconData>[
     Icons.home_outlined,
@@ -36,27 +36,27 @@ class _SmallNavigatorState extends State<SmallNavigator> with TickerProviderStat
   void initState() {
     super.initState();
 
-    _hideBottomBarAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 200),
-      vsync: this,
-    );
+    // _hideBottomBarAnimationController = AnimationController(
+    //   duration: const Duration(milliseconds: 200),
+    //   vsync: this,
+    // );
   }
 
-  bool onScrollNotification(ScrollNotification notification) {
-    if (notification is UserScrollNotification && notification.metrics.axis == Axis.vertical) {
-      switch (notification.direction) {
-        case ScrollDirection.forward:
-          _hideBottomBarAnimationController.reverse();
-          break;
-        case ScrollDirection.reverse:
-          _hideBottomBarAnimationController.forward();
-          break;
-        case ScrollDirection.idle:
-          break;
-      }
-    }
-    return false;
-  }
+  // bool onScrollNotification(ScrollNotification notification) {
+  //   if (notification is UserScrollNotification && notification.metrics.axis == Axis.vertical) {
+  //     switch (notification.direction) {
+  //       case ScrollDirection.forward:
+  //         _hideBottomBarAnimationController.reverse();
+  //         break;
+  //       case ScrollDirection.reverse:
+  //         _hideBottomBarAnimationController.forward();
+  //         break;
+  //       case ScrollDirection.idle:
+  //         break;
+  //     }
+  //   }
+  //   return false;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class _SmallNavigatorState extends State<SmallNavigator> with TickerProviderStat
 
         return Scaffold(
           body: NotificationListener<ScrollNotification>(
-            onNotification: onScrollNotification,
+            // onNotification: onScrollNotification,
             child: Column(
               children: [
                 if (!kIsWeb)
@@ -156,7 +156,7 @@ class _SmallNavigatorState extends State<SmallNavigator> with TickerProviderStat
             splashColor: appState.isDarkMode ? Theme.of(context).iconTheme.color : UIColor().secondaryBlue,
             gapLocation: GapLocation.none,
             onTap: (index) => appState.setBottomNavIndex(index),
-            hideAnimationController: _hideBottomBarAnimationController,
+            // hideAnimationController: _hideBottomBarAnimationController,
           ),
         );
       },
