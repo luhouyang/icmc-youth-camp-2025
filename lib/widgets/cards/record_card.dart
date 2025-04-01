@@ -83,55 +83,58 @@ class _RecordCardState extends State<RecordCard> {
             ),
           ],
         );
-      } else if (widget.recordEntity.recordType == RecordEnum.protect.value) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              widget.appState.groupList[winnerIndex].groupName,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              width: 16,
-            ),
-            Icon(
-              Icons.shield,
-              color: UIColor().brightBlue,
-            ),
-            const SizedBox(
-              width: 16,
-            ),
-            const Text(
-              "1",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
-        );
-      } else if (widget.recordEntity.recordType == RecordEnum.shield.value) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              widget.appState.groupList[winnerIndex].groupName,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              width: 16,
-            ),
-            Icon(
-              Icons.shield,
-              color: UIColor().primaryRed,
-            ),
-            const SizedBox(
-              width: 16,
-            ),
-            const Text(
-              "1",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
-        );
-      } else if (widget.recordEntity.recordType == RecordEnum.steal.value) {
+      } 
+      // else if (widget.recordEntity.recordType == RecordEnum.protect.value) {
+      //   return Row(
+      //     mainAxisAlignment: MainAxisAlignment.start,
+      //     children: [
+      //       Text(
+      //         widget.appState.groupList[winnerIndex].groupName,
+      //         style: const TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       const SizedBox(
+      //         width: 16,
+      //       ),
+      //       Icon(
+      //         Icons.shield,
+      //         color: UIColor().brightBlue,
+      //       ),
+      //       const SizedBox(
+      //         width: 16,
+      //       ),
+      //       const Text(
+      //         "1",
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //     ],
+      //   );
+      // } 
+      // else if (widget.recordEntity.recordType == RecordEnum.shield.value) {
+      //   return Row(
+      //     mainAxisAlignment: MainAxisAlignment.start,
+      //     children: [
+      //       Text(
+      //         widget.appState.groupList[winnerIndex].groupName,
+      //         style: const TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //       const SizedBox(
+      //         width: 16,
+      //       ),
+      //       Icon(
+      //         Icons.shield,
+      //         color: UIColor().primaryRed,
+      //       ),
+      //       const SizedBox(
+      //         width: 16,
+      //       ),
+      //       const Text(
+      //         "1",
+      //         style: TextStyle(fontWeight: FontWeight.bold),
+      //       ),
+      //     ],
+      //   );
+      // } 
+      else if (widget.recordEntity.recordType == RecordEnum.steal.value) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -196,6 +199,10 @@ class _RecordCardState extends State<RecordCard> {
                   padding: const EdgeInsets.all(8),
                 ),
                 onPressed: () async {
+                  // SnackBarText().showBanner(msg: "Deleting record", context: context);
+                  // // Navigator.of(context).pop();
+                  // await GamesFirestore().deleteRecord(widget.recordEntity, widget.appState);
+
                   showDialog(
                     context: context,
                     builder: (context) {

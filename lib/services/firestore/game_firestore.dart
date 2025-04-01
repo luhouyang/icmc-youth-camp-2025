@@ -81,17 +81,17 @@ class GamesFirestore {
     batch.set(db.collection('groups').doc(gameEntity.id), gameEntity.toMap());
 
     // add record
-    DocumentReference recRef = db.collection('records').doc();
-    RecordEntity recordEntity = RecordEntity(
-      id: recRef.id,
-      winner: gameEntity.id,
-      recordType: RecordEnum.protect.value,
-      createdAt: Timestamp.now(),
-    );
+    // DocumentReference recRef = db.collection('records').doc();
+    // RecordEntity recordEntity = RecordEntity(
+    //   id: recRef.id,
+    //   winner: gameEntity.id,
+    //   recordType: RecordEnum.protect.value,
+    //   createdAt: Timestamp.now(),
+    // );
 
-    batch.set(recRef, recordEntity.toMap());
+    // batch.set(recRef, recordEntity.toMap());
 
-    await batch.commit();
+    // await batch.commit();
   }
 
   Future decreaseProtect(String groupName, AppState appState) async {
@@ -109,17 +109,17 @@ class GamesFirestore {
     batch.set(db.collection('groups').doc(gameEntity.id), gameEntity.toMap());
 
     // add record
-    DocumentReference recRef = db.collection('records').doc();
-    RecordEntity recordEntity = RecordEntity(
-      id: recRef.id,
-      winner: gameEntity.id,
-      recordType: RecordEnum.shield.value,
-      createdAt: Timestamp.now(),
-    );
+    // DocumentReference recRef = db.collection('records').doc();
+    // RecordEntity recordEntity = RecordEntity(
+    //   id: recRef.id,
+    //   winner: gameEntity.id,
+    //   recordType: RecordEnum.shield.value,
+    //   createdAt: Timestamp.now(),
+    // );
 
-    batch.set(recRef, recordEntity.toMap());
+    // batch.set(recRef, recordEntity.toMap());
 
-    batch.commit();
+    // batch.commit();
   }
 
   Future stealScore(String winningGroupName, String losingGroupName, int score, AppState appState) async {
@@ -172,11 +172,14 @@ class GamesFirestore {
       winningGroupEntity.score -= recordEntity.score!;
     } else if (recordEntity.recordType == RecordEnum.decrease.value) {
       winningGroupEntity.score += recordEntity.score!;
-    } else if (recordEntity.recordType == RecordEnum.protect.value) {
-      winningGroupEntity.protection -= 1;
-    } else if (recordEntity.recordType == RecordEnum.shield.value) {
-      winningGroupEntity.protection += 1;
-    } else if (recordEntity.recordType == RecordEnum.steal.value) {
+    } 
+    // else if (recordEntity.recordType == RecordEnum.protect.value) {
+    //   winningGroupEntity.protection -= 1;
+    // } 
+    // else if (recordEntity.recordType == RecordEnum.shield.value) {
+    //   winningGroupEntity.protection += 1;
+    // } 
+    else if (recordEntity.recordType == RecordEnum.steal.value) {
       int lossingIndex = appState.groupList.indexWhere(
         (element) => element.id == recordEntity.loser,
       );

@@ -46,7 +46,7 @@ class _GroupCardLargeState extends State<GroupCardLarge> {
                 height: 12,
               ),
               const Divider(),
-              if (widget.isLogin) Text("Protection: ${widget.groupEntity.protection}", style: const TextStyle(fontSize: 20)),
+              // if (widget.isLogin) Text("Protection: ${widget.groupEntity.protection}", style: const TextStyle(fontSize: 20)),
               Text("Mentor: ${widget.groupEntity.mentor}", style: const TextStyle(fontSize: 20)),
             ],
           ),

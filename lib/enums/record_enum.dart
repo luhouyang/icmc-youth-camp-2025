@@ -1,7 +1,7 @@
 enum RecordEnum {
   increase("increase"),
   decrease("decrease"),
-  protect("protect"),
+  // protect("protect"),
   steal("steal"),
   shield("shield");
 

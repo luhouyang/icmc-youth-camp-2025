@@ -40,7 +40,7 @@ class _GroupCardSmallState extends State<GroupCardSmall> {
                 textAlign: TextAlign.center,
               ),
               const Divider(),
-              if (widget.isLogin) Text("Protection: ${widget.groupEntity.protection}", style: const TextStyle(fontSize: 12)),
+              // if (widget.isLogin) Text("Protection: ${widget.groupEntity.protection}", style: const TextStyle(fontSize: 12)),
               Text("Mentor:\n${widget.groupEntity.mentor}", style: const TextStyle(fontSize: 12)),
             ],
           ),
